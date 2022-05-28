@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatLah || Beli Obat, Alat Kesehatan, Periksa Kesehatan Sendiri</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        .card-body {
+          color: black;
+        }
+  
+        footer {
+          color: white;
+        }
+        footer li > a {
+          color: white;
+        }
+        a {
+          text-decoration: none !important;
+        }
+      </style>
+</head>
+<body>
+    <%- include('../layouts/navbar.ejs'); %>
+
+    <div style="margin: 10% 5%">
+        <h1 class="text-center">Wishlist</h1>
+        <br /><br />
+        <div class="row">
+          <% if(products.length > 0 ){ %>
+              <% products.forEach(function(items){ %>
+                  <div class="row mb-4">
+                      <div class="col-md-5 col-lg-3 col-xl-3">
+                          <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                              <img class="img-fluid w-100" src="<%= items.item.imagePath %>" alt="Sample">
+                          </div>
+                      </div>
+                      <div class="col-md-7 col-lg-9 col-xl-9">
+                          <div>
+                              <div class="d-flex justify-content-between">
+                                  <div>
+                                      <h5>
+                                          <%= items.item.name %>
+                                      </h5>
+                                      <p class="mb-3 text-muted text-uppercase small">Price: <%= items.item.price %></p>
+                                  </div>
+                              </div>
+                              <div class="d-flex justify-content-between align-items-center">
+                                  <div>
+                                      <a href="/wishlist/remove-w/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase mr-3">
+                                          <i data-feather="trash"></i> Remove item </a>
+                                      <a href="/wishlist/add-to-cart-from-wish/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase">
+                                          <i data-feather="shopping-bag"></i> Add to cart </a>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <% }); %>
+                      <hr class="mb-4">
+      </div>
+  </div>
+  </div>
+  </div>
+  <% } else {%>
+  <div class="card-body" style="width: auto;">
+  <div class="row">
+      <div class="col-md-8 offset-md-2">
+          <h4 class="text-center m-auto" style="color:rgb(88, 99, 102);"><br><br><br>No items in wishlist!<br></h4>
+      </div>
+  </div>
+  <br><br><br>
+  <% } %>
+        </div>
+      </div> 
+  </div>
+
+    <%- include('../layouts/footer.ejs'); %>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

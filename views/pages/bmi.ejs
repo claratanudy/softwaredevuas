@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatLah || Beli Obat, Alat Kesehatan, Periksa Kesehatan Sendiri</title>
+    
+    <link rel="stylesheet" href="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <%- include('../layouts/navbar.ejs'); %>
+
+    <div class="container" >
+        <div>
+            <h3>BMI Kalkulator</h3>
+            <p>
+                Berat badan ideal adalah impian semua orang. 
+                Tidak hanya memiliki bentuk tubuh yang menunjang penampilan, berat badan ideal juga menandakan kondisi tubuh yang sehat. 
+                Bagaimana denganmu? Yuk, hitung sekarang di BMI Kalkulator.
+            </p>
+            <br>
+            <h5>Keunggulan fitur</h5>
+            <p>1. Menghitung berat badan</p><hr>
+            <p>2. Menentukan kategori berat badan ideal atau tidak</p><hr>
+            <p>3. Menentukan kategori berat badan ideal atau tidak</p>
+        </div>
+        <br>
+        <div style="margin-left: 60px; margin-right: 60px;">
+            <div class="card">
+                <div class="card-header">   
+                    <h5>Kalkulator BMI hanya untukmu!</h5>
+                </div>
+                <br>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Tinggi Badan (cm)</label>
+                        <input type="number" min="0" name="tinggi" id="tinggi" class="form-control" required="" 
+                        placeholder="Masukkan Tinggi Badan">
+                    </div><br>
+                    <div class="form-group">
+                        <label>Berat Badan (kg)</label>
+                        <input type="number" min="0" name="berat" id="berat" class="form-control" required=""
+                        placeholder="Masukkan Berat Badan">
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <button onclick="hitung()"  style="width: 100%;" class="btn-primaryy">Hitung</button>
+                    </div><br><br>
+                    <h4 id="bmi"></h4>
+                    <h5 id="keterangan"></h5>
+                </div>
+                <div class="card-footer">
+                    <p>Powered by SehatLah</p>
+                </div>
+            </div>
+        </div>
+        <br><br>
+    </div>
+
+    <script type="text/javascript">
+        var tinggi, berat, keterangan, bmi;
+        function hitung(){
+            tinggi = parseFloat(document.getElementById("tinggi").value);
+            tinggi /=100;
+            berat = parseFloat(document.getElementById("berat").value);
+            bmi = berat / (tinggi * tinggi); 
+            if (bmi > 27) {
+                keterangan = "Gemuk, berat badan berlebih, silahkan melakukan diet yang diawasi oleh tenaga kesehatan";
+            } else if ((bmi >=25.1) & (bmi <=27)) {
+                keterangan = "Agak Gemuk, tingkat obesitas rendah. Tetap lakukan pengurangan input kalori";
+            } else if ((bmi >=18.5) & (bmi <=25)) {
+                keterangan = "Berat badan normal! Tetap jaga pola makan yah!";
+            } else if ((bmi >=17) & (bmi<=18.4)) {
+                keterangan = "Agak kurus, kekurangan berat badan tingkat rendah";
+            } else {
+                keterangan = "Sangat kurus, segera lakukan perbaikan gizi!"
+            }
+            document.getElementById('bmi').innerHTML = "Hasil Perhitungan BMI : " + bmi.toFixed(1);
+            document.getElementById('keterangan').innerHTML = "Keterangan : " + keterangan; 
+        }
+    </script>
+
+        <%- include('../layouts/footer.ejs'); %>
+
+        
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

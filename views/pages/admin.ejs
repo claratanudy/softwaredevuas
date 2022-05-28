@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatLah || Admin</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+            .card{
+                background: white;
+                border-radius: 10px;
+                box-shadow: 1px 2px 8px rgba(0, 0,0, 0.65);
+                height: auto;
+                width: auto;
+                margin: 9.2rem auto 9.2rem auto;
+            }
+
+            .ball {
+  			    position: absolute;
+  			    border-radius: 100%;
+  			    opacity: 0.3;
+  			    z-index: -100;
+		    }
+
+		    #background {
+                background-image: linear-gradient(to right, rgba(255,0,0,0), rgba(255,0,0,1));
+    		    position:fixed;
+    		    top:0;
+    		    width:100%;
+    		    height:100%;
+		    }
+    </style>
+</head>
+<body>
+    <div id="background">
+        <div class="container">
+            <div class ="card text-center">
+            <h1 >Admin Only</h1>
+                <form action="/authenticationadmin" method="post">
+                    <table>
+                    <tbody >
+                        <label for="email"><b>Email : </b></label><br>
+                        <input id="email" placeholder="Enter your email" maxlength="50" name="email" type="email" required /><br><br>
+
+                        <label for="password"><b>Password :</b></label><br>
+                        <input id="password" placeholder="Enter your password" maxlength="50" name="password" type="password" required/><br><br>
+                    
+                        <!-- <input type="button" style="width: 100px; " value="LOGIN"> -->
+                        <button style="width: 190px;" type="submit" class="btn btn-success">LOGIN</button>
+                        <br><br>
+                        <% if (locals.error) { %>
+                            <div class="alert alert-danger" role="alert">
+                                <div class="text-center">
+                                    <%= error %>
+                                </div>
+                            </div>
+                          <% } %>
+                        
+                    </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+	<script>
+		// membuat daftar warna 
+		const colors = ["#3CC157", "#2AA7FF", "#1B1B1B", "#FCBC0F", "#F85F36"]; 
+		// menentukan jumlah gelembung
+		const numBalls = 50;
+		
+		// membuat fungsi array kosong untuk membungkus semua gelembung
+		const balls = [];
+		// mulai menggandakan gelembung
+		for (let i = 0; i < numBalls; i++) {
+  			// membuat elemen div baru untuk setiap gelembung
+  			let ball = document.createElement("div"); 
+  			ball.classList.add("ball");
+  			// menambahkan warna pada setiap gelembung sesuai daftar warna yang sudah kita buat
+  			ball.style.background = colors[Math.floor(Math.random() * colors.length)];
+  			// menentukan posisi /lokasi setiap gelembung secara acak
+  			ball.style.left = `${Math.floor(Math.random() * 100)}%`;
+  			ball.style.top = `${Math.floor(Math.random() * 100)}%`;
+  			// menentukan ukuran gelembung 
+  			ball.style.transform = `scale(${Math.random() * 2})`;
+  			ball.style.width = `${Math.random() * 2}em`;
+  			ball.style.height = ball.style.width;
+
+  			// membungkus semua gelembung menjadi satu array
+  			balls.push(ball);
+            balls.forEach((el, i, ra) => {
+            // membuat nilai perubahan lokasi secara acak untuk setiap gelembung
+            let to = {
+                x: Math.random() * (i % 2 === 0 ? -11 : 11),
+                y: Math.random() * 12
+            };
+
+            // menambahkan efek animasi pada setiap gelembung
+            let anim = el.animate(
+            [
+                { transform: "translate(0, 0)" },
+                { transform: `translate(${to.x}rem, ${to.y}rem)` }
+                ],
+                {
+                duration: (Math.random() + 1) * 2000, // random duration
+                direction: "alternate",
+                fill: "both",
+                iterations: Infinity,
+                easing: "ease-in-out"
+                }
+                );
+            });
+  			    // menampilkan semua gelembung ke dalam html
+			    document.getElementById("background").append(ball);
+		}
+    </script>
+</body>
+</html>

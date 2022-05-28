@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatLah || Admin</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <%- include('../layouts/navbaradmin.ejs'); %>
+    <div class="container">
+        <a href="/addartikel">
+            <button class="btn btn-success" style="float: right;">ADD ARTICLE</button>
+        </a>
+        <div><br><br><br><br>
+        <ol>
+            <% artikelList.forEach((data) =>  { %>
+            <li>
+                <div class="row">
+                    <div class="col-3">
+                        <img style="width: 100%;" src="img/artikelmuka.jpg" >
+                    </div>
+                    <div class="col-2">
+                        <p><%= data.title %></p>
+                    </div>
+                    <div class="col-5">
+                        <p><%= data.isi %></p>
+                    </div>
+                    <div class="col-2">
+                        <div class="row">
+                            <div class="col">
+                                <a href="/updateartikel">
+                                    <button class="button_general button_green">Update</button>
+                                </a>
+                            </div>
+                            <div>
+                                <button class="button_general button_red"  data-bs-toggle="modal" data-bs-target="#exampleModalToggle3" >Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <% }); %>
+
+    <div class="modal fade" id="exampleModalToggle3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="width:400px">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title">HAPUS ARTIKEL</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <img src="img/artikelmuka.jpg"  width="100%" height="200px"> 
+                    <h6 class="text-center">Judul : nama artikel</h6> 
+                </div>
+                <div style="margin: 5% 5%;">
+                    <h4>Apakah Anda yakin ingin menghapus artikel ini?</h4>
+                    <div>
+                        <a class="d-flex justify-content-center btn btn-success">
+                        YES
+                        </a>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script>
+            feather.replace()
+        </script>
+
+</body>
+</html>

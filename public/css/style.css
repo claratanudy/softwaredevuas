@@ -1,0 +1,199 @@
+.modal-header{
+    background: -webkit-linear-gradient(bottom, #432dbd, #7bd4f7);
+}
+
+.card-body {
+    color: black;
+}
+
+footer  {
+    color: white;
+}
+footer li > a {
+    color: white;
+}
+
+a {
+    text-decoration: none !important;
+    color: black;
+}
+
+
+.nav-links{
+    flex: 1;
+    text-align: left;
+    padding-top: 15px;
+}
+
+.nav-links ul{
+    display: inline-block;
+    list-style-type: none;
+}
+.nav-links ul li{
+    display: inline-block;
+    margin-right: 50px;
+}
+.nav-links ul li a{
+    color: black;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.nav-links ul li::after{
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: #ec3ba8;
+    display: block;
+    margin: auto;
+    transition: 0.5s;
+}
+.nav-links ul li:hover::after{
+    width: 100%;
+}
+
+.opening
+{
+    background: radial-gradient(rgb(252, 252, 252),#ffceea);
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.sehat:hover{
+    box-shadow: 2px 2px 10px rgb(255, 0, 85);
+    transition: .5s;
+    border-radius: 25px;
+    padding: 20px;;
+}
+
+.artikel-judul {
+    text-shadow: 3px 2px 1px grey;
+    font-size: 40px;
+}
+
+.artikel {
+    background: -webkit-linear-gradient(45deg, #08AADB, #f07328);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.btn-primaryy{
+    display: inline-block;
+    background: #ff3b76;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.btn-primaryy:hover{
+    background-color: darkred;
+    color: #ddd;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.faq-content {
+    display: flex;
+    padding: 10px;
+    border-left: solid;
+}
+
+.faq-header {
+    font-size: 30pt;
+    margin-right: 20px;
+}
+
+.faq-isi {
+    padding-top: 18px;
+}
+
+.big-text {
+    font-size: 16pt;
+}
+
+.tab { 
+    display:inline-block; 
+    margin-left: 45px; 
+}
+
+#card-register-dokter {
+    background: lightcyan;
+    border-radius: 10px;
+    box-shadow: 1px 2px 8px rgba(0, 0,0, 0.65);
+    width: auto;
+    margin: 6rem auto 6rem auto;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#navbar{
+    list-style-type: none;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.1);
+    top: 0;
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+}
+
+
+/* CSS ADMIN */
+.button_red{
+    display: inline-block;
+    background: #ff0000;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.button_red:hover{
+    background-color: rgb(99, 0, 0);
+    color: #ddd;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.button_green{
+    display: inline-block;
+    background: #01b32df8;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.button_green:hover{
+    background-color: rgb(21, 58, 3);
+    color: #ddd;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.area_drag_n_drop{
+    width:500px;
+    height:500px;  
+    border:2px dashed #ccc;  
+    line-height:500px;  
+    text-align:center;  
+    font-size:24px;
+    margin: auto;
+  }
+.hover_area_drag{
+    color: #fff;
+    border-color: #000;
+}
+
+#navbaradmin
+{
+    list-style-type: none;
+    box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.1);
+    top: 0;
+    position: sticky;
+    width: 100%;
+    z-index: 1;
+}
+

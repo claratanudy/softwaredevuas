@@ -1,0 +1,442 @@
+<% if (locals.error) { %>
+  <div class="alert alert-danger" role="alert">
+      <div class="text-center">
+          <%= error %>
+      </div>
+  </div>
+<% } %>
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img src="img/logo-sehatlah.png" width="180px" height="60px"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="nav-links">
+                    <nav>
+                        <ul>
+                            <li><a href="/">Beranda</a></li>
+                            <li><a href="/artikel">Artikel</a></li>
+                            <li><a href="/allproducts">Beli Obat</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <ul class="navbar-nav d-flex">
+                    <% if (locals.isLoggedIn) { %>
+                      <li class="nav-item">
+                        <button style="font-size: 14pt; opacity: 70%;" type="button" class="btn btn-link " data-bs-toggle="modal">
+                          <a href="/cart" style="color: black; "><i data-feather="shopping-bag"></i></a>
+                        </button>
+                        <button style="font-size: 14pt; opacity: 70%;" type="button" class="btn btn-link " data-bs-toggle="modal">
+                          <a href="/wishlist" style="color: black; "><i data-feather="heart"></i></a>
+                        </button>
+                        <button style="color: black; font-size: 14pt; opacity: 70%;"; type="button" class="btn btn-link " data-bs-toggle="modal" data-bs-target="#exampleModalToggle4">
+                          PROFILE
+                        </button>
+                        <button style="font-size: 14pt; opacity: 70%;" type="button" class="btn btn-link " data-bs-toggle="modal">
+                          <a href="/logout" style="color: black; ">LOGOUT</a>
+                        </button>
+                      </li>
+                    <% } else { %>
+                      <li class="nav-item">
+                        <button style="color: black; font-size: 14pt; opacity: 70%;"; type="button" class="btn btn-link " data-bs-toggle="modal" data-bs-target="#exampleModalToggle2">
+                          SIGN IN
+                        </button>
+                        <button style="color: black; font-size: 14pt; opacity: 70%;"; type="button" class="btn btn-link " data-bs-toggle="modal" data-bs-target="#exampleModalToggle">
+                          SIGN UP
+                        </button>
+                      </li>
+                    <% } %>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!--SIGN UP USER-->
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel">SIGN UP</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" >
+              <form action="/register" method="post">
+                <label for="name"><b>Full Name: </b></label><br>
+                <input id="name" placeholder="Enter your full name" maxlength="50" name="name" type="text" required /><br><br>
+            
+                <label for="email"><b>Email : </b></label><br>
+                <input id="email" placeholder="Enter your email" maxlength="50" name="email" type="email" required /><br><br>
+
+                <label for="password"><b>Password :</b></label><br>
+                <input id="password" placeholder="Enter your password" maxlength="50" name="password" type="password" required/><br><br>
+                
+                <button style="width: 190px;" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-success" type="submit">Create Akun</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+                <p>
+                    Already Have an Account?<a class="btn btn-link" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">LOGIN</a>
+                </p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--LOGIN USER-->
+      <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalToggleLabel2">LOGIN</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="/authenticationuser" method="post">
+                <label for="emailuser"><b>Email : </b></label><br>
+                <input id="emailuser" placeholder="Enter your email" maxlength="50" name="email" type="email" required /><br><br>
+
+                <label for="passworduser"><b>Password :</b></label><br>
+                <input id="passworduser" placeholder="Enter your password" maxlength="50" name="password" type="password" required/><br><br>
+
+                <!-- <a data-bs-target="" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-success"style="width: 190px;" >LOGIN</a> -->
+                <button style="width: 190px;" type="submit" class="btn btn-success">LOGIN</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+                    <a data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal"  class="btn btn-link" >Create New Account Here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        <!--PROFILE USER PAS LOGIN-->
+        <div class="modal fade" id="exampleModalToggle4" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel4">PROFILE USER</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" >
+                    <div class="container">
+                        <div class="main-body">
+                                <div class="col">
+                                  <div class="card-0">
+                                    <div class="card-body">
+                                      <div class="d-flex flex-column align-items-center text-center">
+                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                        <div class="mt-3">
+                                          <h4>Clara</h4>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  
+                                 
+                                </div>
+                                <div class="col">
+                                  <div class="card-0 mb-3">
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Nama Lengkap</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          <h4>Bertrand Ferrari</h4>
+                                        </div>
+                                      </div>
+                                      <hr>
+                                      <div class="row">
+                                        <div class="col-sm-4">
+                                          <h6 class="mb-0">Email</h6>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                          bertrand@gmail.com
+                                        </div>
+                                      </div>
+                                      <hr>
+                                    </div>
+                                  </div>
+                                </div>
+                    
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success" data-bs-target="#exampleModalToggle5" data-bs-toggle="modal" data-bs-dismiss="modal">EDIT PROFILE</a>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--EDIT PROFILE USER-->
+          <div class="modal fade" id="exampleModalToggle5" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalToggleLabel5">EDIT PROFILE</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="main-body">
+                                <div class="col">
+                                    <div class="card-0">
+                                        <div class="card-body">
+                                            <div class="d-flex flex-column align-items-center text-center">
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                                <div class="mt-3">
+                                                    <h4>Bertrand Ferrari</h4>
+                                                </div>
+                                            </div>
+                
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card-0">
+                                        <div class="card-body">
+                                            <div class="row mb-3">
+                                                <div class="col-sm-3">
+                                                    <h6 class="mb-0">Full Name</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <input type="text" class="form-control" value="Bertrand Ferrari">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-3">
+                                                    <h6 class="mb-0">Email</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <input type="text" class="form-control" value="bertrand@gmail.com">
+                                                </div>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-sm-3">
+                                                    <h6 class="mb-0">Nomor HP</h6>
+                                                </div>
+                                                <div class="col-sm-9 text-secondary">
+                                                    <input type="text" class="form-control" value="0123456789">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                        <a data-bs-target="#exampleModalToggle4" data-bs-toggle="modal" data-bs-dismiss="modal"  class="btn btn-success" >SAVE CHANGES</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!--LOGIN DOKTER-->
+            <div class="modal fade" id="exampleModalToggle10" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel10">LOGIN</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/authenticationdokter" method="post">
+                        <label for="email-dokter"><b>Email : </b></label><br>
+                        <input id="email-dokter" placeholder="Enter your email" maxlength="50" name="email" type="email" required /><br><br>
+    
+                        <label for="password-dokter"><b>Password :</b></label><br>
+                        <input id="password-dokter" placeholder="Enter your password" maxlength="50" name="password" type="password" required/><br><br>
+                        
+                        <!-- <a data-bs-target="#exampleModalToggle11" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-success"style="width: 190px;" >LOGIN</a> -->
+                        <button style="width: 190px;" type="submit" class="btn btn-success">LOGIN</button>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                            <a href="/registerdokter"class="btn btn-success" >Create New Account Here</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!--PROFILE DOKTER PAS LOGIN-->
+            <div class="modal fade" id="exampleModalToggle11" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel11">PROFILE DOKTER</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" >
+                        <div class="container">
+                            <div class="main-body">
+                                    <div class="col">
+                                      <div class="card-0">
+                                        <div class="card-body">
+                                          <div class="d-flex flex-column align-items-center text-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                            <div class="mt-3">
+                                              <h4>Bertrand Ferrari</h4>
+                                              <p class="text-secondary mb-1">Dokter Umum</p>
+                                              <p class="text-muted font-size-sm">Rumah Sakit Islam Kristen Bersaudara</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                     
+                                    </div>
+                                    <div class="col">
+                                      <div class="card-0 mb-4">
+                                        <div class="card-body">
+                                          <div class="row">
+                                            <div class="col-sm-4">
+                                              <h6 class="mb-0">Nama Lengkap</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                              Bertrand Ferrari
+                                            </div>
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                            <div class="col-sm-4">
+                                              <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                              bertrand@gmail.com
+                                            </div>
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                            <div class="col-sm-4">
+                                              <h6 class="mb-0">Nomor HP</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                0123456789
+                                            </div>
+                                          </div>
+                                          <hr>
+                                          <div class="row">
+                                            <div class="col-sm-4">
+                                              <h6 class="mb-0">Lokasi Praktik</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                              Rumah Sakit Islam Kristen Bersaudara
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-success" data-bs-target="#exampleModalToggle12" data-bs-toggle="modal" data-bs-dismiss="modal">EDIT PROFILE</a>
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!--EDIT PROFILE DOKTER-->
+            <div class="modal fade" id="exampleModalToggle12" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel12">EDIT PROFILE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="main-body">
+                                    <div class="col">
+                                        <div class="card-0">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-column align-items-center text-center">
+                                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                                    <div class="mt-3">
+                                                        <h4>Bertrand Ferrari</h4>
+                                                        <p class="text-secondary mb-1">Dokter Umum</p>
+                                                        <p class="text-muted font-size-sm">Rumah Sakit Islam Kristen Bersaudara</p>
+                                                    </div>
+                                                </div>
+                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="card-0">
+                                            <div class="card-body">
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="mb-0">Full Name</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" class="form-control" value="Bertrand Ferrari">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="mb-0">Email</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" class="form-control" value="bertrand@gmail.com">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="mb-0">Nomor HP</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" class="form-control" value="0123456789">
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-3">
+                                                    <div class="col-sm-3">
+                                                        <h6 class="mb-0">Address</h6>
+                                                    </div>
+                                                    <div class="col-sm-9 text-secondary">
+                                                        <input type="text" class="form-control" value="Rumah Sakit Islam Kristen Bersaudara">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                            <a data-bs-target="#exampleModalToggle11" data-bs-toggle="modal" data-bs-dismiss="modal"  class="btn btn-success" >SAVE CHANGES</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+
+            <!-- THANK YOU DOKTER -->
+            <div class="modal fade" id="exampleModalToggle3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" style="width:400px">
+                <div class="modal-content">
+                  <div class="modal-header justify-content-center">
+                    <h5 class="modal-title">Thank You!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                      <div style="margin: 5% 5%;">
+                          <h4>Hello, </h4>
+                          <p class="card-text">
+                          Thank you for registering an account.
+                          Your registration will be verified in 3 working days, and we'll contact you soon.
+                          </p>
+                          <p><a href="/">Back to Website</a></p>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
