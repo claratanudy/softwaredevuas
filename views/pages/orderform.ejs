@@ -66,7 +66,7 @@
               <label>
               <textarea class="input100 produk">
                 <% products.forEach((items) =>{ %>
-                  <%= items.item.name %>
+                  <%= items.qty %> <%= items.item.name %>,
                 <% }) %>
               </textarea>
               </label>
@@ -89,7 +89,7 @@
         // Onclick Whatsapp Sent!
         $('#whatsapp .submit').click(WhatsApp);
         $("#whatsapp input, #whatsapp textarea").keypress(function() {
-        if (event.which == 13) WhatsApp();
+        if (event.which == 1000) WhatsApp();
         });
         var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
 
@@ -112,7 +112,7 @@
             return false;
         } else if ($('#whatsapp .produk').val() == '') { // Cek produk
             ph = $('#whatsapp .produk').attr('placeholder');
-            alert('Silahkan tulis ' + ph);
+            // alert('Silahkan tulis ' + ph);
             $('#whatsapp .produk').focus(); 
             return false;
         } else {
