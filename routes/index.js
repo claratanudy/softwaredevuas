@@ -34,12 +34,6 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
 
         var cart = new Cart(req.session.cart);
 
-        // if(cart === null){
-        //     console.log('Not Found!');
-        // } else {
-        //     console.log(cart instanceof Cart);
-        // }
-
         console.log(cart.generateArray());
         res.render('pages/cart', { products: cart.generateArray(), totalPrice: cart.totalPrice });
     });
@@ -48,7 +42,6 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
         const productId = req.params.id;
         const cart = new Cart(req.session.cart ? req.session.cart : {});
         
-     
         cart.removeItem(productId);
         req.session.cart = cart;
         res.redirect('/cart');
@@ -79,41 +72,17 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
         const wish = new Wish(req.session.wish ? req.session.wish : {});
         const cart = new Cart(req.session.cart ? req.session.cart : {});
         
-        var product = new Array(Product.find({_id: productId}));
-
-        wish.add(product, productId);
-        cart.removeItem(productId);
-        req.session.wish = wish;
-        req.session.cart = cart;
-        console.log('req sesion wish'+req.session.wish);
-        res.redirect('/cart');
-    
-        // Product.findByPk(productId).then(product => {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-
-        //     wish.add(product, product.id);
-        //     cart.removeItem(productId);
-        //     req.session.wshi = wish;
-        //     req.session.cart = cart;
-        //     console.log(req.session.wish);
-        //     res.redirect('/cart');
-        // })
-
-        // Product.findByPk(productId, function(err, product) {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-
-        //     wish.add(product, product.id);
-        //     cart.removeItem(productId);
-        //     req.session.wshi = wish;
-        //     req.session.cart = cart;
-        //     console.log(req.session.wish);
-        //     res.redirect('/cart');
-        // });
-
+        // var product = new Array(Product.find({_id: productId}));
+        var id = new require('mongodb').ObjectID(productId);
+        Product.findOne({'_id':id})
+        .then(function(doc) {
+            wish.add(doc, productId);
+            cart.removeItem(productId);
+            req.session.wish = wish;
+            req.session.cart = cart;
+            console.log('req sesion wish'+req.session.wish);
+            res.redirect('/cart');
+        });
 
 
     });
@@ -144,118 +113,58 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
         const cart = new Cart(req.session.cart ? req.session.cart : {});
         const wish = new Wish(req.session.wish ? req.session.wish : {});
         
-        var product = new Array(Product.find({_id: productId}));
+        // var product = new Array(Product.find({_id: productId}));
 
-        cart.add(product, productId);
-        wish.removeItem(productId);
-        req.session.cart = cart;
-        req.session.wish = wish;
-        console.log(req.session.cart);
-        res.redirect('/wishlist');
+        var id = new require('mongodb').ObjectID(productId);
+        Product.findOne({'_id':id})
+        .then(function(doc) {
+            cart.add(doc, productId);
+            wish.removeItem(doc, productId);
+            req.session.cart = cart;
+            req.session.wish = wish;
+            // console.log(req.session.cart);
+            res.redirect('/wishlist');
+        });
 
-        // Product.findByPk(productId).then(product => {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-
-        //     cart.add(product, product.id);
-        //     wish.removeItem(productId);
-        //     req.session.cart = cart;
-        //     req.session.wish = wish;
-        //     console.log(req.session.cart);
-        //     res.redirect('/wishlist');
-        // })
-
-        // Product.findByPk(productId, function(err, product) {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-        //     cart.add(product, product.id);
-        //     wish.removeItem(productId);
-        //     req.session.cart = cart;
-        //     req.session.wish = wish;
-        //     console.log(req.session.cart);
-        //     res.redirect('/wishlist');
-        // });
 
     });
-
-
-
 
     router.get('/add-to-wish/:id', (req, res) => {
         const productId = req.params.id;
         const wish = new Wish(req.session.wish ? req.session.wish : {});
-        var product = new Array(Product.find({_id: productId}));
+        // var product = new Array(Product.find({_id: productId}));
         // console.log(product);
 
-        wish.add(product, productId);
-        req.session.wish = wish;
-        console.log(req.session.wish);
-        res.redirect('/allproducts');
-     
-        // Product.findByPk(productId).then(product => {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-
-        //     wish.add(product, product.id);
-        //     req.session.wish = wish;
-        //     console.log(req.session.wish);
-        //     res.redirect('/allproducts');
-        // })
-
-        // Product.findByPk(productId, function(err, product) {
-        //     if (err) {
-        //         return res.redirect('/allproducts');
-        //     }
-        //     wish.add(product, product.id);
-        //     req.session.wish = wish;
-        //     console.log(req.session.wish);
-        //     res.redirect('/allproducts');
-        // });
-
+        var id = new require('mongodb').ObjectID(productId);
+        Product.findOne({'_id':id})
+        .then(function(doc) {
+            wish.add(doc, productId);
+            req.session.wish = wish;
+            console.log(req.session.wish);
+            res.redirect('/allproducts');
+        });
      });
      
      router.get('/add-to-cart/:id', (req, res, next) => {
         const productId = req.params.id;
+        console.log("product id" + productId)
         const cart = new Cart(req.session.cart ? req.session.cart : {});
 
-        var product = new Array(Product.find({_id: productId}));
-        // console.log(product);
-       
-
-        cart.add(product, productId);
-        // console.log(cart);
-        req.session.cart = cart;
-        // console.log(req.session.cart);
-        res.redirect('/allproducts');
-        
-     
-        // Product.find(productId).then(product => {
-        //     if (err) {
-        //         return res.redirect('/allproduct');
-        //     }
-
-        //     cart.add(product, product.id);
-        //     req.session.cart = cart;
-        //     console.log(req.session.cart);
-        //     res.redirect('/allproducts');
-        // });
-
-        // Product.find(productId, function(err, product) {
-        //     if (err) {
-        //         return res.redirect('/allproducts');
-        //     }
-        //     cart.add(product, product.id);
-        //     req.session.cart = cart;
-        //     console.log(req.session.cart);
-        //     return res.redirect('/allproducts');
-        // });
+        //var product = new Array(Product.findOne({_id: productId}));
+        var id = new require('mongodb').ObjectID(productId);
+        Product.findOne({'_id':id})
+        .then(function(doc) {
+            cart.add(doc, productId);
+            req.session.cart = cart;
+            res.redirect('/allproducts');
+        });
+    
      });
 
 
-
+    router.get(('/orderform'), async (req, res) => {
+        res.render('pages/orderform');
+    })
 
     router.get(('/artikel'), async (req, res) => {
         const data = await artikelDB.find().toArray();

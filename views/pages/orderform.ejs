@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SehatLah || Beli Obat, Alat Kesehatan, Periksa Kesehatan Sendiri</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/order.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        #kirim {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+    </style>
+</head>
+<body>
+    <%- include('../layouts/navbar.ejs'); %>
+
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+          <form class="contact100-form validate-form" id="whatsapp">
+            <span class="contact100-form-title">Formulir Order Via WhatsApp</span>
+            <input class="tujuan" type="hidden" id="noAdmin">
+            <div class="wrap-input100">
+              <span class="label-input100">Nama</span>
+              <label>
+              <input class="input100 nama" type="text" placeholder="Masukkan nama Anda">
+              </label>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100">
+              <span class="label-input100">Nomor WhatsApp</span>
+              <label>
+              <input class="input100 nowhatsapp" type="text" placeholder="08xxxxxxxxxx">
+              </label>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100">
+              <span class="label-input100">Alamat</span>
+              <label>
+              <input class="input100 alamat" placeholder="alamat lengkap Anda">
+              </label>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100">
+              <span class="label-input100">Produk</span>
+              <label>
+              <textarea class="input100 produk" placeholder="produk yang Anda inginkan"></textarea>
+              </label>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="container-contact100-form-btn">
+              <div class="wrap-contact100-form-btn">
+                <div class="contact100-form-bgbtn"></div>
+                <a class="btn-primaryy btn-danger submit" id="kirim">Kirim</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <script>
+          $("#noAdmin").val("08111344788 ");
+        $('.whatsapp-btn').click(function() {
+        $('#whatsapp').toggleClass('toggle');
+        });
+        // Onclick Whatsapp Sent!
+        $('#whatsapp .submit').click(WhatsApp);
+        $("#whatsapp input, #whatsapp textarea").keypress(function() {
+        if (event.which == 13) WhatsApp();
+        });
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        function WhatsApp() {
+        var ph = '';
+        if ($('#whatsapp .nama').val() == '') { // Cek Nama
+            ph = $('#whatsapp .nama').attr('placeholder');
+            alert('Silahkan tulis ' + ph);
+            $('#whatsapp .nama').focus();
+            return false;
+        } else if ($('#whatsapp .nowhatsapp').val() == '') { // Cek Whatsapp
+            ph = $('#whatsapp .nowhatsapp').attr('placeholder');
+            alert('Silahkan tulis ' + ph);
+            $('#whatsapp .nowhatsapp').focus();
+            return false;
+        } else if ($('#whatsapp .alamat').val() == '') { // Cek Alamat
+            ph = $('#whatsapp .alamat').attr('placeholder');
+            alert('Silahkan tulis ' + ph);
+            $('#whatsapp .alamat').focus();
+            return false;
+        } else if ($('#whatsapp .produk').val() == '') { // Cek produk
+            ph = $('#whatsapp .produk').attr('placeholder');
+            alert('Silahkan tulis ' + ph);
+            $('#whatsapp .produk').focus(); 
+            return false;
+        } else {
+            // Check Device (Mobile/Desktop)
+            var url_wa = 'https://web.whatsapp.com/send';
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            url_wa = 'whatsapp://send/';
+            }
+            // Get Value
+            var tujuan = $('#whatsapp .tujuan').val(),
+            via_url = location.href,
+            nama = $('#whatsapp .nama').val(),
+            nowhatsapp = $('#whatsapp .nowhatsapp').val(),
+            alamat = $('#whatsapp .alamat').val(),
+            produk = $('#whatsapp .produk').val();
+            $(this).attr('href', url_wa + '?phone=62 ' + tujuan + '&text=Nama : ' + nama + ' %0ANo. Whatsapp : ' + nowhatsapp + '%0AAlamat : ' + alamat + '%0AProduk : ' + produk +' %0A%0Avia ' + via_url);
+            var w = 960,
+            h = 540,
+            left = Number((screen.width / 2) - (w / 2)),
+            tops = Number((screen.height / 2) - (h / 2)),
+            popupWindow = window.open(this.href, '', 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=1, copyhistory=no, width=' + w + ', height=' + h + ', top=' + tops + ', left=' + left);
+            popupWindow.focus();
+            return false;
+        }
+        }
+    </script>
+
+    <%- include('../layouts/footer.ejs'); %> 
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script>
+        feather.replace()
+    </script>
+</body>
+</html>

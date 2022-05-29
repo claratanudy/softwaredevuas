@@ -50,7 +50,7 @@
                     <div>
                       <div class="d-flex justify-content-between">
                         <div>
-                          <h1><%= items.item.name %></h1>
+                          <h5><%= items.item.name %></h5>
                           <h5><%= items.name %></h5>
                           <p class="mb-3 text-muted text-uppercase small">Price: <%= items.item.price %></p>
                         </div>
@@ -59,14 +59,14 @@
                             <div class="mb-0 w-100">
                               <div class="input-group">
                                 <span class="input-group-btn">
-                                  <a href="/cart/reduce/<%= items.item._id %>"
+                                  <a href="/reduce/<%= items.item._id %>"
                                     ><button type="button" class="btn btn-default btn-number" data-type="minus" data-field="quant[1]">
                                       <i data-feather="minus-square"></i></button
                                   ></a>
                                 </span>
                                 <input type="text" name="quant[1]" disabled="disabled" class="form-control input-number" value="<%= items.qty %>" min="1" max="10" />
                                 <span class="input-group-btn">
-                                  <a href="/cart/increase/<%= items.item._id %>"
+                                  <a href="/increase/<%= items.item._id %>"
                                     ><button type="button" class="btn btn-default btn-number" data-type="plus" data-field="quant[1]">
                                       <i data-feather="plus-square"></i></button
                                   ></a>
@@ -78,8 +78,8 @@
                       </div>
                       <div class="d-flex justify-content-between align-items-center">
                         <div>
-                          <a href="/cart/remove/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase mr-3"> <i data-feather="trash"></i> Remove item </a>
-                          <a href="/cart/add-to-wish-from-cart/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase"> <i data-feather="heart"></i> Add to wishlist </a>
+                          <a href="/remove/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase mr-3"> <i data-feather="trash"></i> Remove item </a>
+                          <a href="/add-to-wish-from-cart/<%= items.item._id %>" type="button" class="card-link-secondary small text-uppercase"> <i data-feather="heart"></i> Add to wishlist </a>
                         </div>
                         <p class="mb-0">
                           <span><strong>Rp <%= items.price %></strong></span>
@@ -112,7 +112,8 @@
                     <span><strong>Rp <%= totalPrice %></strong></span>
                   </li>
                 </ul>
-                <a href="/checkout"><button type="button" class="btn btn-primary btn-block waves-effect waves-light">Checkout</button></a>
+                <!-- <a href="https://api.whatsapp.com/send?phone=628111344788&text=Hello, i want buy some medicine products"><button type="button" style="width: 100%;" class="btn-primaryy border border-danger">WhatsApp Us For Order</button></a> -->
+                <a href="/orderform"><button type="button" style="width: 100%;" class="btn-primaryy border border-danger">Checkout & Complete Formulir Order</button></a>
               </div>
             </div>
           </div>
