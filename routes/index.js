@@ -140,14 +140,13 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
         .then(function(doc) {
             wish.add(doc, productId);
             req.session.wish = wish;
-            console.log(req.session.wish);
             res.redirect('/allproducts');
         });
      });
      
      router.get('/add-to-cart/:id', (req, res, next) => {
         const productId = req.params.id;
-        console.log("product id" + productId)
+        // console.log("product id" + productId)
         const cart = new Cart(req.session.cart ? req.session.cart : {});
 
         //var product = new Array(Product.findOne({_id: productId}));
@@ -161,11 +160,12 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
     
      });
 
-
     router.get(('/orderform'), async (req, res) => {
         res.render('pages/orderform');
+
     })
 
+    
     router.get(('/artikel'), async (req, res) => {
         const data = await artikelDB.find().toArray();
         res.render('pages/artikel', { artikelList: data });
