@@ -195,12 +195,12 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
         res.render('pages/isiartikel')
     })
     
-    router.get(('/kalenderK'), (req, res) => {
-        res.render('pages/kalenderK')
+    router.get(('/kalkulatorLT'), (req, res) => {
+        res.render('pages/kalkulatorLT')
     })
     
-    router.get(('/kalenderM'), (req, res) => {
-        res.render('pages/kalenderM')
+    router.get(('/kalkulatorK'), (req, res) => {
+        res.render('pages/kalkulatorK')
     })
     
     router.get(('/kategori'), (req, res) => {
