@@ -161,7 +161,31 @@ MongoClient.connect('mongodb://clara:clara123@cluster0-shard-00-00.mkqbl.mongodb
      });
 
     router.get(('/orderform'), async (req, res) => {
-        res.render('pages/orderform');
+        // const productId = req.params.id;
+        // const cart = new cart(req.session.cart);
+        // var product = new Array(Product.find({_id: productId}));
+        // console.log(product);
+        const cart = new Cart(req.session.cart);
+
+        var name = new require('mongodb').ObjectName(name);
+        Product.findOne({'name': name})
+        .then(function(doc) {
+            orderform.add(doc, productId);
+            req.session.wish = cart;
+            res.redirect('pages/orderform', {name: req.session.name});
+        });
+
+        // res.render('pages/orderform');
+        // const productId = req.params.name;
+        // const cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        // var name = new require('mongodb').ObjectID(productId);
+        // Product.findOne({'name':this.name})
+        // .then(function(doc) {
+        //     cart.add(doc, productId);
+        //     req.session.cart = cart;
+        //     res.redirect('pages/orderform', {name: req.session.name});
+        // });
 
     })
 
